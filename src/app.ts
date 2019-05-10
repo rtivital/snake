@@ -1,20 +1,14 @@
 import oc from './open-color';
+import Canvas from './Canvas';
 
-const canvas = <HTMLCanvasElement>document.getElementById('app');
-const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
-
-canvas.width = document.body.clientWidth;
-canvas.height = document.body.clientHeight;
-
-function init() {
-  ctx.fillStyle = oc.gray[9];
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-window.addEventListener('resize', () => {
-  canvas.width = document.body.clientWidth;
-  canvas.height = document.body.clientHeight;
-  init();
+const canvas = new Canvas({
+  selector: '#app',
+  renderers: [
+    ({ ctx, element }) => {
+      ctx.fillStyle = oc.gray[9];
+      ctx.fillRect(0, 0, element.width, element.height);
+    },
+  ],
 });
 
-init();
+canvas.render();

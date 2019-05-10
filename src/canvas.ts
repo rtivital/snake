@@ -1,4 +1,4 @@
-import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 
 type Renderer = (canvas: Canvas) => void;
 
@@ -17,19 +17,22 @@ export default class Canvas {
     this.ctx = <CanvasRenderingContext2D> this.element.getContext('2d');
     this.renderers = renderers;
 
-    this.fitToWindow();
+    // do not render until it is really necessary
+    this.fitToWindow({ render: false });
 
-    window.addEventListener('resize', debounce(this.fitToWindow, 500));
+    // we need to render on resize to make sure we do not break anything
+    window.addEventListener('resize', throttle(() => this.fitToWindow({ render: true }), 200));
   }
-
-  private fitToWindow = (): this => {
-    this.element.width = window.innerWidth;
-    this.element.height = window.innerHeight;
-    return this;
-  };
 
   public render = (): this => {
     this.renderers.forEach((renderer) => renderer(this));
+    return this;
+  };
+
+  private fitToWindow = ({ render }: { render: boolean }): this => {
+    this.element.width = window.innerWidth;
+    this.element.height = window.innerHeight;
+    render && this.render();
     return this;
   };
 }
