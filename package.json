@@ -1,0 +1,50 @@
+{
+  "name": "rame-rift",
+  "version": "1.0.0",
+  "description": "Rame Rift game",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "cross-env NODE_ENV=production BUILD=build node scripts/build",
+    "start": "cross-env NODE_ENV=development PORT=5001 node scripts/start",
+    "lint": "eslint --ext .ts ./src",
+    "deploy": "cross-env NODE_ENV=production node scripts/deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtivital/rame-rift.git"
+  },
+  "keywords": [],
+  "author": "Vitaly Rtishchev <rtivital@gmail.com> (http://github.com/rtivital)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rtivital/rame-rift/issues"
+  },
+  "homepage": "https://rtivital.github.io/rame-rift",
+  "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "acorn": "^6.1.1",
+    "bluebird": "^3.5.4",
+    "chalk": "^2.4.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-typescript": "^3.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "gh-pages": "^2.0.1",
+    "git-repo-name": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.7.1",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^5.4.5",
+    "typescript": "^3.4.5",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {}
+}
