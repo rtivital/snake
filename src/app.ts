@@ -1,7 +1,7 @@
 import oc from './open-color';
 
-const canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('app');
-const ctx: CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContext('2d');
+const canvas = <HTMLCanvasElement>document.getElementById('app');
+const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
 
 canvas.width = document.body.clientWidth;
 canvas.height = document.body.clientHeight;
