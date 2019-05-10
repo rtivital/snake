@@ -1,7 +1,7 @@
 {
-  "name": "rame-rift",
+  "name": "snake",
   "version": "1.0.0",
-  "description": "Rame Rift game",
+  "description": "Snake game",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rtivital/rame-rift.git"
+    "url": "git+https://github.com/rtivital/snake.git"
   },
   "keywords": [],
   "author": "Vitaly Rtishchev <rtivital@gmail.com> (http://github.com/rtivital)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rtivital/rame-rift/issues"
+    "url": "https://github.com/rtivital/snake/issues"
   },
-  "homepage": "https://rtivital.github.io/rame-rift",
+  "homepage": "https://rtivital.github.io/snake",
   "devDependencies": {
     "@types/jest": "^24.0.12",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
