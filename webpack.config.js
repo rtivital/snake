@@ -45,7 +45,13 @@ module.exports = {
   },
 
   module: {
-    rules: [{ test: /\.ts$/, loader: 'ts-loader' }],
+    rules: [
+      { test: /\.ts$/, loader: 'ts-loader' },
+      {
+        test: /\.(svg|png|jpg|gif|woff|woff2|otf|ttf|eot|ogg)$/,
+        loader: 'file-loader',
+      },
+    ],
   },
 
   plugins: PRODUCTION ? plugins : [...plugins, new webpack.HotModuleReplacementPlugin()],
