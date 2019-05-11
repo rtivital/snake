@@ -4,13 +4,13 @@ type Renderer = (canvas: Canvas) => void;
 
 interface CanvasInterface {
   selector: string;
-  renderers: [Renderer];
+  renderers: Renderer[];
 }
 
 export default class Canvas {
   public element: HTMLCanvasElement;
   public ctx: CanvasRenderingContext2D;
-  private renderers: [Renderer];
+  private renderers: Renderer[];
 
   constructor({ selector, renderers }: CanvasInterface) {
     this.element = <HTMLCanvasElement>document.querySelector(selector);
@@ -32,6 +32,15 @@ export default class Canvas {
   private fitToWindow = ({ render }: { render: boolean }): this => {
     this.element.width = window.innerWidth;
     this.element.height = window.innerHeight;
+
+    const rect = this.element.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    this.element.width = rect.width * dpr;
+    this.element.height = rect.height * dpr;
+
+    this.ctx.scale(dpr, dpr);
+
     render && this.render();
     return this;
   };
