@@ -4,15 +4,21 @@ import { DirectionState } from './direction';
 export type SnakeState = Readonly<{ x: number; y: number; head: boolean }>[];
 
 export const MOVE = 'snake/MOVE';
+export const GROW = 'snake/GROW';
 
 interface MoveAction {
   type: typeof MOVE;
   payload: DirectionState;
 }
 
-export type SnakeActions = MoveAction;
+interface GrowAction {
+  type: typeof GROW;
+}
+
+export type SnakeActions = MoveAction | GrowAction;
 
 export const moveSnake = (direction: DirectionState): MoveAction => ({ type: MOVE, payload: direction });
+export const growSnake = (): GrowAction => ({ type: GROW });
 
 export const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
   .fill(0)
@@ -37,6 +43,9 @@ export default function snakeReducer(state: SnakeState = initialState, action: S
 
       return snake;
     }
+
+    case GROW:
+      return [...state, { ...state[state.length - 1] }];
 
     default:
       return state;

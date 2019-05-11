@@ -6,9 +6,10 @@ import snakeRenderer from './renders/snakeRenderer';
 import baitRenderer from './renders/baitRenderer';
 import store from './store/store';
 import { setDirection } from './store/modules/direction';
-import { moveSnake } from './store/modules/snake';
+import { moveSnake, growSnake } from './store/modules/snake';
 import { GAME_SPEED, PLAYGROUND_SIZE } from './configuration';
 import { gameOver, setGameInterval } from './store/modules/game';
+import { generateBait } from './store/modules/bait';
 
 const canvas = new Canvas({
   selector: '#app',
@@ -57,6 +58,7 @@ function game(): void {
   const {
     direction,
     snake,
+    bait,
     game: { interval },
   } = store.getState();
 
@@ -64,6 +66,11 @@ function game(): void {
     store.dispatch(gameOver());
     window.clearInterval(interval);
   } else {
+    const head = snake[0];
+    if (head.x === bait.x && head.y === bait.y) {
+      store.dispatch(growSnake());
+      store.dispatch(generateBait(snake));
+    }
     store.dispatch(moveSnake(direction));
   }
 }
