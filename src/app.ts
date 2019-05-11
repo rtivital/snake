@@ -3,6 +3,7 @@ import backgroundRenderer from './renders/backgroundRenderer';
 import scoreRenderer from './renders/scoreRenderer';
 import playgroundRenderer from './renders/playgroundRenderer';
 import snakeRenderer from './renders/snakeRenderer';
+import baitRenderer from './renders/baitRenderer';
 import store from './store/store';
 import { setDirection } from './store/modules/direction';
 import { moveSnake } from './store/modules/snake';
@@ -11,7 +12,7 @@ import { gameOver, setGameInterval } from './store/modules/game';
 
 const canvas = new Canvas({
   selector: '#app',
-  renderers: [backgroundRenderer, scoreRenderer, playgroundRenderer, snakeRenderer],
+  renderers: [backgroundRenderer, scoreRenderer, playgroundRenderer, baitRenderer, snakeRenderer],
 });
 
 store.subscribe(canvas.render);

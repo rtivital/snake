@@ -14,7 +14,7 @@ export type SnakeActions = MoveAction;
 
 export const moveSnake = (direction: DirectionState): MoveAction => ({ type: MOVE, payload: direction });
 
-const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
+export const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
   .fill(0)
   .map((_, index) => ({
     x: Math.round(PLAYGROUND_SIZE / 2),
