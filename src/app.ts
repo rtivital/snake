@@ -9,6 +9,7 @@ import { setDirection } from './store/modules/direction';
 import { moveSnake, growSnake } from './store/modules/snake';
 import { GAME_SPEED, PLAYGROUND_SIZE } from './configuration';
 import { gameOver, setGameInterval } from './store/modules/game';
+import audio from './audio/audio';
 import { generateBait } from './store/modules/bait';
 
 const canvas = new Canvas({
@@ -65,11 +66,13 @@ function game(): void {
   if (hasCollisions(snake)) {
     store.dispatch(gameOver());
     window.clearInterval(interval);
+    audio.gameOver.play();
   } else {
     const head = snake[0];
     if (head.x === bait.x && head.y === bait.y) {
       store.dispatch(growSnake());
       store.dispatch(generateBait(snake));
+      audio.bait.play();
     }
     store.dispatch(moveSnake(direction));
   }
