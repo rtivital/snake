@@ -15,19 +15,26 @@ export type SnakeActions = MoveAction;
 const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
   .fill(0)
   .map((_, index) => ({
-    x: Math.round(PLAYGROUND_SIZE / 2) + index,
+    x: Math.round(PLAYGROUND_SIZE / 2),
     y: Math.round(PLAYGROUND_SIZE / 2) + index,
-    head: index === INITIAL_SNAKE_SIZE - 1,
+    head: index === 0,
   }));
 
 export default function snakeReducer(state: SnakeState = initialState, action: SnakeActions): SnakeState {
   switch (action.type) {
-    case MOVE:
-      return state.map((part) => ({
-        ...part,
-        x: action.payload === 'left' ? part.x - 1 : action.payload === 'right' ? part.x + 1 : part.x,
-        y: action.payload === 'down' ? part.x - 1 : action.payload === 'up' ? part.x + 1 : part.x,
-      }));
+    case MOVE: {
+      const oldHead = <{ x: number; y: number; head: boolean }>state.find((part) => part.head);
+      const snake = state.map((part) => ({ ...part, head: false }));
+      snake.pop();
+
+      snake.unshift({
+        x: action.payload === 'left' ? oldHead.x - 1 : action.payload === 'right' ? oldHead.x + 1 : oldHead.x,
+        y: action.payload === 'up' ? oldHead.y - 1 : action.payload === 'down' ? oldHead.y + 1 : oldHead.y,
+        head: true,
+      });
+
+      return snake;
+    }
 
     default:
       return state;
