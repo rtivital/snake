@@ -1,14 +1,23 @@
 import oc from '../open-color';
 import Canvas from '../Canvas';
-import { TILE_SIZE, PLAYGROUND_SIZE, PLAYGROUND_DOT_SIZE } from '../configuration';
+import { TILE_SIZE, PLAYGROUND_SIZE, PLAYGROUND_DOT_SIZE, PLAYGROUND_WALL_SIZE } from '../configuration';
 
 export default function playgroundRenderer({ ctx, width, height }: Canvas): void {
   ctx.fillStyle = oc.white;
+  ctx.strokeStyle = oc.teal[5];
+  ctx.lineWidth = PLAYGROUND_WALL_SIZE;
+
   const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
   const playbroundBeginX = (width - playgroundSize) / 2;
   const playbroundBeginY = (height - playgroundSize) / 2;
 
   ctx.fillRect(playbroundBeginX, playbroundBeginY, playgroundSize, playgroundSize);
+  ctx.strokeRect(
+    playbroundBeginX - PLAYGROUND_WALL_SIZE / 2,
+    playbroundBeginY - PLAYGROUND_WALL_SIZE / 2,
+    playgroundSize + PLAYGROUND_WALL_SIZE,
+    playgroundSize + PLAYGROUND_WALL_SIZE
+  );
 
   ctx.fillStyle = oc.indigo[1];
 
