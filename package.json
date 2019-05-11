@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "typesafe-actions": "^4.2.1"
   }
 }
