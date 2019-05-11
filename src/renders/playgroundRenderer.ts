@@ -2,13 +2,8 @@ import oc from '../open-color';
 import Canvas from '../Canvas';
 import { TILE_SIZE } from '../configuration';
 
-export default function playgroundRenderer({ ctx, element }: Canvas): void {
+export default function playgroundRenderer({ ctx, width, height }: Canvas): void {
   ctx.fillStyle = oc.white;
-  const playgroundSize = TILE_SIZE * 40;
-  ctx.fillRect(
-    (element.width - playgroundSize * window.devicePixelRatio) / 2 / window.devicePixelRatio,
-    (element.height - playgroundSize * window.devicePixelRatio) / 2 / window.devicePixelRatio,
-    playgroundSize,
-    playgroundSize
-  );
+  const playgroundSize = TILE_SIZE * 30;
+  ctx.fillRect((width - playgroundSize) / 2, (height - playgroundSize) / 2, playgroundSize, playgroundSize);
 }

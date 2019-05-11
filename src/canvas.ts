@@ -10,15 +10,23 @@ interface CanvasInterface {
 export default class Canvas {
   public element: HTMLCanvasElement;
   public ctx: CanvasRenderingContext2D;
+  public dpr: number;
+  public width: number;
+  public height: number;
   private renderers: Renderer[];
 
   constructor({ selector, renderers }: CanvasInterface) {
     this.element = <HTMLCanvasElement>document.querySelector(selector);
     this.ctx = <CanvasRenderingContext2D> this.element.getContext('2d');
     this.renderers = renderers;
+    this.dpr = window.devicePixelRatio || 1;
 
     // do not render until it is really necessary
     this.fitToWindow({ render: false });
+
+    const rect = this.element.getBoundingClientRect();
+    this.width = rect.width;
+    this.height = rect.height;
 
     // we need to render on resize to make sure we do not break anything
     window.addEventListener('resize', throttle(() => this.fitToWindow({ render: true }), 200));
@@ -34,12 +42,11 @@ export default class Canvas {
     this.element.height = window.innerHeight;
 
     const rect = this.element.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-
-    this.element.width = rect.width * dpr;
-    this.element.height = rect.height * dpr;
-
-    this.ctx.scale(dpr, dpr);
+    this.width = rect.width;
+    this.height = rect.height;
+    this.element.width = rect.width * this.dpr;
+    this.element.height = rect.height * this.dpr;
+    this.ctx.scale(this.dpr, this.dpr);
 
     render && this.render();
     return this;
