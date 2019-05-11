@@ -4,7 +4,7 @@ import { TILE_SIZE, PLAYGROUND_SIZE, PLAYGROUND_DOT_SIZE, PLAYGROUND_WALL_SIZE }
 
 export default function playgroundRenderer({ ctx, width, height }: Canvas): void {
   ctx.fillStyle = oc.white;
-  ctx.strokeStyle = oc.teal[5];
+  ctx.strokeStyle = oc.lime[5];
   ctx.lineWidth = PLAYGROUND_WALL_SIZE;
 
   const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
@@ -19,7 +19,7 @@ export default function playgroundRenderer({ ctx, width, height }: Canvas): void
     playgroundSize + PLAYGROUND_WALL_SIZE
   );
 
-  ctx.fillStyle = oc.indigo[1];
+  ctx.fillStyle = oc.indigo[0];
 
   for (let x = 0; x < PLAYGROUND_SIZE; x += 1) {
     for (let y = 0; y < PLAYGROUND_SIZE; y += 1) {

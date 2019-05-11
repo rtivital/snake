@@ -12,6 +12,8 @@ interface MoveAction {
 
 export type SnakeActions = MoveAction;
 
+export const moveSnake = (direction: DirectionState): MoveAction => ({ type: MOVE, payload: direction });
+
 const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
   .fill(0)
   .map((_, index) => ({
@@ -23,7 +25,7 @@ const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
 export default function snakeReducer(state: SnakeState = initialState, action: SnakeActions): SnakeState {
   switch (action.type) {
     case MOVE: {
-      const oldHead = <{ x: number; y: number; head: boolean }>state.find((part) => part.head);
+      const oldHead = state[0];
       const snake = state.map((part) => ({ ...part, head: false }));
       snake.pop();
 

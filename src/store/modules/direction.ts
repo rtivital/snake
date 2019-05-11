@@ -14,9 +14,29 @@ export const setDirection = (direction: DirectionState): SetDirectionAction => (
   payload: direction,
 });
 
+function isOpositeDirection(direction: DirectionState, nextDirection: DirectionState): boolean {
+  if (direction === 'up') {
+    return nextDirection === 'down';
+  }
+
+  if (direction === 'down') {
+    return nextDirection === 'up';
+  }
+
+  if (direction === 'left') {
+    return nextDirection === 'right';
+  }
+
+  if (direction === 'right') {
+    return nextDirection === 'left';
+  }
+
+  return false;
+}
+
 export default function directionReducer(state: DirectionState = 'up', action: DirectionActions): DirectionState {
   if (action.type === SET_DIRECTION) {
-    return action.payload;
+    return isOpositeDirection(state, action.payload) ? state : action.payload;
   }
 
   return state;
