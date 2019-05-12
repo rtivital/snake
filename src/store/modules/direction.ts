@@ -1,3 +1,5 @@
+import { ResetAction, RESET } from './game';
+
 export type DirectionState = 'left' | 'right' | 'down' | 'up';
 
 export const SET_DIRECTION = 'direction/SET_DIRECTION';
@@ -7,7 +9,7 @@ interface SetDirectionAction {
   payload: DirectionState;
 }
 
-export type DirectionActions = SetDirectionAction;
+export type DirectionActions = SetDirectionAction | ResetAction;
 
 export const setDirection = (direction: DirectionState): SetDirectionAction => ({
   type: SET_DIRECTION,
@@ -35,9 +37,14 @@ function isOpositeDirection(direction: DirectionState, nextDirection: DirectionS
 }
 
 export default function directionReducer(state: DirectionState = 'up', action: DirectionActions): DirectionState {
-  if (action.type === SET_DIRECTION) {
-    return isOpositeDirection(state, action.payload) ? state : action.payload;
-  }
+  switch (action.type) {
+    case RESET:
+      return 'up';
 
-  return state;
+    case SET_DIRECTION:
+      return isOpositeDirection(state, action.payload) ? state : action.payload;
+
+    default:
+      return state;
+  }
 }

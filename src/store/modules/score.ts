@@ -1,3 +1,5 @@
+import { ResetAction, RESET } from './game';
+
 export type ScoreState = number;
 
 const INCREMENT = 'score/INCREMENT';
@@ -12,13 +14,16 @@ interface SetScoreAction {
   payload: number;
 }
 
-export type ScoreActions = IncrementScoreAction | SetScoreAction;
+export type ScoreActions = IncrementScoreAction | SetScoreAction | ResetAction;
 
 export const incrementScore = (): IncrementScoreAction => ({ type: INCREMENT });
 export const setScore = (score: number): SetScoreAction => ({ type: SET_SCORE, payload: score });
 
 export default function scoreReducer(state: ScoreState = 0, action: ScoreActions): ScoreState {
   switch (action.type) {
+    case RESET:
+      return 0;
+
     case INCREMENT:
       return state + 1;
 
