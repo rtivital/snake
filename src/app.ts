@@ -9,6 +9,7 @@ import { setDirection } from './store/modules/direction';
 import { moveSnake, growSnake } from './store/modules/snake';
 import { GAME_SPEED, PLAYGROUND_SIZE } from './configuration';
 import { gameOver, setGameInterval } from './store/modules/game';
+import { incrementScore } from './store/modules/score';
 import audio from './audio/audio';
 import { generateBait } from './store/modules/bait';
 
@@ -72,6 +73,7 @@ function game(): void {
     if (head.x === bait.x && head.y === bait.y) {
       store.dispatch(growSnake());
       store.dispatch(generateBait(snake));
+      store.dispatch(incrementScore());
       audio.bait.play();
     }
     store.dispatch(moveSnake(direction));
