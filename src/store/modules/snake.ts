@@ -1,8 +1,6 @@
 import { PLAYGROUND_SIZE, INITIAL_SNAKE_SIZE } from '../../configuration';
-import { Direction } from '../../types';
+import { Direction, Snake } from '../../types';
 import { ResetAction, RESET } from './game';
-
-export type SnakeState = Readonly<{ x: number; y: number; head: boolean }>[];
 
 export const MOVE = 'snake/MOVE';
 export const GROW = 'snake/GROW';
@@ -21,7 +19,7 @@ export type SnakeActions = MoveAction | GrowAction | ResetAction;
 export const moveSnake = (direction: Direction): MoveAction => ({ type: MOVE, payload: direction });
 export const growSnake = (): GrowAction => ({ type: GROW });
 
-export const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
+export const initialState: Snake = Array(INITIAL_SNAKE_SIZE)
   .fill(0)
   .map((_, index) => ({
     x: Math.round(PLAYGROUND_SIZE / 2),
@@ -29,7 +27,7 @@ export const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)
     head: index === 0,
   }));
 
-export default function snakeReducer(state: SnakeState = initialState, action: SnakeActions): SnakeState {
+export default function snakeReducer(state: Snake = initialState, action: SnakeActions): Snake {
   switch (action.type) {
     case RESET:
       return initialState;

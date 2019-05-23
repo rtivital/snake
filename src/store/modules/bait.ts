@@ -1,22 +1,19 @@
 import random from 'lodash.random';
-import { SnakeState, initialState as snakeInitialState } from './snake';
+import { initialState as snakeInitialState } from './snake';
 import { ResetAction, RESET } from './game';
+import { Snake, Coordinate } from '../../types';
 import { PLAYGROUND_SIZE } from '../../configuration';
 
 export const GENERATE_BAIT = 'bait/GENERATE_BAIT';
 
-export type BaitState = Readonly<{ x: number; y: number }>;
-
 interface GenerateBaitAction {
   type: typeof GENERATE_BAIT;
-  payload: SnakeState;
+  payload: Snake;
 }
 
-export const generateBait = (snake: SnakeState): GenerateBaitAction => ({ type: GENERATE_BAIT, payload: snake });
+export const generateBait = (snake: Snake): GenerateBaitAction => ({ type: GENERATE_BAIT, payload: snake });
 
-export type BaitActions = GenerateBaitAction | ResetAction;
-
-function getRandomCoordinates(snake: SnakeState): BaitState {
+function getRandomCoordinates(snake: Snake): Coordinate {
   const x = random(0, PLAYGROUND_SIZE - 1);
   const y = random(0, PLAYGROUND_SIZE - 1);
 
@@ -29,10 +26,12 @@ function getRandomCoordinates(snake: SnakeState): BaitState {
   return { x, y };
 }
 
+type BaitActions = GenerateBaitAction | ResetAction;
+
 export default function baitReducer(
-  state: BaitState = getRandomCoordinates(snakeInitialState),
+  state: Coordinate = getRandomCoordinates(snakeInitialState),
   action: BaitActions
-): BaitState {
+): Coordinate {
   switch (action.type) {
     case RESET:
       return getRandomCoordinates(snakeInitialState);
