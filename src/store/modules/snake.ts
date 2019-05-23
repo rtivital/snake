@@ -1,5 +1,5 @@
 import { PLAYGROUND_SIZE, INITIAL_SNAKE_SIZE } from '../../configuration';
-import { DirectionState } from './direction';
+import { Direction } from '../../types';
 import { ResetAction, RESET } from './game';
 
 export type SnakeState = Readonly<{ x: number; y: number; head: boolean }>[];
@@ -9,7 +9,7 @@ export const GROW = 'snake/GROW';
 
 interface MoveAction {
   type: typeof MOVE;
-  payload: DirectionState;
+  payload: Direction;
 }
 
 interface GrowAction {
@@ -18,7 +18,7 @@ interface GrowAction {
 
 export type SnakeActions = MoveAction | GrowAction | ResetAction;
 
-export const moveSnake = (direction: DirectionState): MoveAction => ({ type: MOVE, payload: direction });
+export const moveSnake = (direction: Direction): MoveAction => ({ type: MOVE, payload: direction });
 export const growSnake = (): GrowAction => ({ type: GROW });
 
 export const initialState: SnakeState = Array(INITIAL_SNAKE_SIZE)

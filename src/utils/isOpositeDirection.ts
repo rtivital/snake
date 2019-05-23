@@ -1,4 +1,4 @@
-export type Direction = 'up' | 'down' | 'left' | 'right';
+import { Direction } from '../types';
 
 const OPOSITE_DIRECTIONS = {
   up: 'down',

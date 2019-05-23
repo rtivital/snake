@@ -10,5 +10,5 @@ export default function scoreRenderer({ ctx, width, height }: Canvas): void {
 
   ctx.font = "20px 'Roboto', monospase";
   ctx.fillStyle = oc.white;
-  ctx.fillText(`Score: ${store.getState().score}`, playbroundBeginX - PLAYGROUND_WALL_SIZE, playbroundBeginY - 25);
+  ctx.fillText(`Score: ${store.getState().game.score}`, playbroundBeginX - PLAYGROUND_WALL_SIZE, playbroundBeginY - 25);
 }

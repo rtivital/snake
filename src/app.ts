@@ -6,11 +6,9 @@ import snakeRenderer from './renders/snakeRenderer';
 import baitRenderer from './renders/baitRenderer';
 import gameOverRenderer from './renders/gameOverRenderer';
 import store from './store/store';
-import { setDirection } from './store/modules/direction';
 import { moveSnake, growSnake } from './store/modules/snake';
 import { GAME_SPEED, PLAYGROUND_SIZE } from './configuration';
-import { gameOver, setGameInterval } from './store/modules/game';
-import { incrementScore } from './store/modules/score';
+import { gameOver, setGameInterval, incrementScore, setDirection } from './store/modules/game';
 import audio from './audio/audio';
 import { generateBait } from './store/modules/bait';
 
@@ -59,10 +57,9 @@ function hasCollisions(snake: { x: number; y: number }[]): boolean {
 
 function game(): void {
   const {
-    direction,
     snake,
     bait,
-    game: { interval },
+    game: { interval, direction },
   } = store.getState();
 
   if (hasCollisions(snake)) {

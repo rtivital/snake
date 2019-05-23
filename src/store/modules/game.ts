@@ -1,4 +1,5 @@
-import isOpositeDirection, { Direction } from '../../utils/isOpositeDirection';
+import { Direction } from '../../types';
+import isOpositeDirection from '../../utils/isOpositeDirection';
 
 export const SET_GAME_INTERVAL = 'game/SET_GAME_INTERVAL';
 export const GAME_OVER = 'game/GAME_OVER';
