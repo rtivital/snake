@@ -5,16 +5,14 @@ import { ResetAction, RESET } from './game';
 export const MOVE = 'snake/MOVE';
 export const GROW = 'snake/GROW';
 
-interface MoveAction {
+export interface MoveAction {
   type: typeof MOVE;
   payload: Direction;
 }
 
-interface GrowAction {
+export interface GrowAction {
   type: typeof GROW;
 }
-
-export type SnakeActions = MoveAction | GrowAction | ResetAction;
 
 export const moveSnake = (direction: Direction): MoveAction => ({ type: MOVE, payload: direction });
 export const growSnake = (): GrowAction => ({ type: GROW });
@@ -26,6 +24,8 @@ export const initialState: Snake = Array(INITIAL_SNAKE_SIZE)
     y: Math.round(PLAYGROUND_SIZE / 2) + index,
     head: index === 0,
   }));
+
+export type SnakeActions = MoveAction | GrowAction | ResetAction;
 
 export default function snakeReducer(state: Snake = initialState, action: SnakeActions): Snake {
   switch (action.type) {
