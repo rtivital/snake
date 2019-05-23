@@ -22,20 +22,21 @@ store.subscribe(canvas.render);
 canvas.render();
 
 window.addEventListener('keydown', (event) => {
-  const { key } = event;
-  if (key === 'ArrowUp' || key === 'w') {
+  const { which } = event;
+
+  if (which === 87 || which === 38) {
     store.dispatch(setDirection('up'));
   }
 
-  if (key === 'ArrowDown' || key === 's') {
+  if (which === 83 || which === 40) {
     store.dispatch(setDirection('down'));
   }
 
-  if (key === 'ArrowRight' || key === 'd') {
+  if (which === 68 || which === 39) {
     store.dispatch(setDirection('right'));
   }
 
-  if (key === 'ArrowLeft' || key === 'a') {
+  if (which === 65 || which === 37) {
     store.dispatch(setDirection('left'));
   }
 });
