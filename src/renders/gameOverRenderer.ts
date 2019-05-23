@@ -1,6 +1,6 @@
 import oc from '../open-color';
 import Canvas from '../Canvas';
-import { TILE_SIZE, PLAYGROUND_SIZE, PLAYGROUND_WALL_SIZE } from '../configuration';
+import { TILE_SIZE, PLAYGROUND_SIZE } from '../configuration';
 import store from '../store/store';
 
 export default function gameOverRenderer({ ctx, width, height }: Canvas): void {
@@ -12,10 +12,10 @@ export default function gameOverRenderer({ ctx, width, height }: Canvas): void {
     const playbroundBeginY = (height - playgroundSize) / 2;
 
     ctx.fillRect(
-      playbroundBeginX - PLAYGROUND_WALL_SIZE,
-      playbroundBeginY - PLAYGROUND_WALL_SIZE,
-      playgroundSize + PLAYGROUND_WALL_SIZE * 2,
-      playgroundSize + PLAYGROUND_WALL_SIZE * 2
+      playbroundBeginX - TILE_SIZE,
+      playbroundBeginY - TILE_SIZE,
+      playgroundSize + TILE_SIZE * 2,
+      playgroundSize + TILE_SIZE * 2
     );
   }
 }
