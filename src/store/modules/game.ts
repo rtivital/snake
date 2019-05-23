@@ -1,15 +1,22 @@
 import { Direction } from '../../types';
 import isOpositeDirection from '../../utils/isOpositeDirection';
 
+export const INITIALIZE_GAME = 'game/INITIALIZE_GAME';
 export const SET_GAME_INTERVAL = 'game/SET_GAME_INTERVAL';
 export const GAME_OVER = 'game/GAME_OVER';
 export const RESET = 'game/RESET';
 export const SET_DIRECTION = 'game/SET_DIRECTION';
 export const INCREMENT_SCORE = 'game/INCREMENT_SCORE';
 
-type GameState = Readonly<{ interval: number; gameOver: boolean; direction: Direction; score: number }>;
+type GameState = Readonly<{
+  interval: number;
+  gameOver: boolean;
+  direction: Direction;
+  score: number;
+  initialized: boolean;
+}>;
 
-export const initialState: GameState = { interval: 0, gameOver: false, direction: 'up', score: 0 };
+export const initialState: GameState = { interval: 0, gameOver: false, direction: 'up', score: 0, initialized: false };
 
 export interface SetGameIntervalAction {
   type: typeof SET_GAME_INTERVAL;
@@ -33,6 +40,10 @@ export interface IncrementScoreAction {
   type: typeof INCREMENT_SCORE;
 }
 
+export interface InitializeGameAction {
+  type: typeof INITIALIZE_GAME;
+}
+
 export const setGameInterval = (interval: number): SetGameIntervalAction => ({
   type: SET_GAME_INTERVAL,
   payload: interval,
@@ -43,16 +54,26 @@ export const setDirection = (direction: Direction): SetDirectionAction => ({
   payload: direction,
 });
 
+export const initializeGame = (): InitializeGameAction => ({ type: INITIALIZE_GAME });
 export const reset = (): ResetAction => ({ type: RESET });
 export const gameOver = (): GameOverAction => ({ type: GAME_OVER });
 export const incrementScore = (): IncrementScoreAction => ({ type: INCREMENT_SCORE });
 
-type GameActions = SetGameIntervalAction | GameOverAction | ResetAction | SetDirectionAction | IncrementScoreAction;
+type GameActions =
+  | SetGameIntervalAction
+  | GameOverAction
+  | ResetAction
+  | SetDirectionAction
+  | IncrementScoreAction
+  | InitializeGameAction;
 
 export default function gameReducer(state: GameState = initialState, action: GameActions): GameState {
   switch (action.type) {
+    case INITIALIZE_GAME:
+      return { ...state, initialized: true };
+
     case RESET:
-      return initialState;
+      return { ...initialState, initialized: true };
 
     case GAME_OVER:
       return { ...state, gameOver: true };
