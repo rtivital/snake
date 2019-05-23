@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rtivital/snake.git"
+    "url": "git+https://github.com/let-s-build-games/snake.git"
   },
   "keywords": [],
   "author": "Vitaly Rtishchev <rtivital@gmail.com> (http://github.com/rtivital)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rtivital/snake/issues"
+    "url": "https://github.com/let-s-build-games/snake/issues"
   },
-  "homepage": "https://rtivital.github.io/snake",
+  "homepage": "https://let-s-build-games.github.io/snake",
   "devDependencies": {
     "@types/jest": "^24.0.12",
     "@types/lodash.throttle": "^4.1.6",
