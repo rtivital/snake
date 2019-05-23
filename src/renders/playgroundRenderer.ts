@@ -1,10 +1,9 @@
-import oc from '../open-color';
 import Canvas from '../Canvas';
-import { TILE_SIZE, PLAYGROUND_SIZE } from '../configuration';
+import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_LIGHT_INDIGO, COLOR_WHITE, COLOR_LIME } from '../configuration';
 
 export default function playgroundRenderer({ ctx, width, height }: Canvas): void {
-  ctx.fillStyle = oc.white;
-  ctx.strokeStyle = oc.lime[5];
+  ctx.fillStyle = COLOR_WHITE;
+  ctx.strokeStyle = COLOR_LIME;
   ctx.lineWidth = TILE_SIZE;
 
   const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
@@ -19,7 +18,7 @@ export default function playgroundRenderer({ ctx, width, height }: Canvas): void
     playgroundSize + TILE_SIZE
   );
 
-  ctx.fillStyle = oc.indigo[0];
+  ctx.fillStyle = COLOR_LIGHT_INDIGO;
 
   const dotSize = TILE_SIZE / 5;
 

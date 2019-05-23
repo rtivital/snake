@@ -1,7 +1,7 @@
-import oc from '../open-color';
+import { COLOR_DARK_GRAY } from '../configuration';
 import Canvas from '../Canvas';
 
 export default function backgroundRenderer({ ctx, width, height }: Canvas): void {
-  ctx.fillStyle = oc.gray[9];
+  ctx.fillStyle = COLOR_DARK_GRAY;
   ctx.fillRect(0, 0, width, height);
 }

@@ -1,11 +1,10 @@
-import oc from '../open-color';
 import Canvas from '../Canvas';
-import { TILE_SIZE, PLAYGROUND_SIZE } from '../configuration';
+import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_RED } from '../configuration';
 import store from '../store/store';
 
 export default function gameOverRenderer({ ctx, width, height }: Canvas): void {
   if (store.getState().game.gameOver) {
-    ctx.fillStyle = oc.red[5];
+    ctx.fillStyle = COLOR_RED;
 
     const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
     const playbroundBeginX = (width - playgroundSize) / 2;
