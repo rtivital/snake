@@ -2,11 +2,6 @@ import throttle from 'lodash.throttle';
 
 type Renderer = (canvas: Canvas) => void;
 
-interface CanvasInterface {
-  selector: string;
-  renderers: Renderer[];
-}
-
 export default class Canvas {
   public element: HTMLCanvasElement;
   public ctx: CanvasRenderingContext2D;
@@ -15,7 +10,7 @@ export default class Canvas {
   public height: number;
   private renderers: Renderer[];
 
-  constructor({ selector, renderers }: CanvasInterface) {
+  constructor({ selector, renderers }: { selector: string; renderers: Renderer[] }) {
     this.element = <HTMLCanvasElement>document.querySelector(selector);
     this.ctx = <CanvasRenderingContext2D> this.element.getContext('2d');
     this.renderers = renderers;
