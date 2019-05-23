@@ -1,14 +1,14 @@
 import Canvas from '../Canvas';
+import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_LIGHT_INDIGO, COLOR_WHITE, COLOR_LIME } from '../configuration';
 
-export default function playgroundRenderer({ ctx, width, height }: Canvas): void {
+export default function playgroundRenderer(canvas: Canvas): void {
+  const { ctx } = canvas;
+  const { playgroundSize, playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
+
   ctx.fillStyle = COLOR_WHITE;
   ctx.strokeStyle = COLOR_LIME;
   ctx.lineWidth = TILE_SIZE;
-
-  const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
-  const playbroundBeginX = (width - playgroundSize) / 2;
-  const playbroundBeginY = (height - playgroundSize) / 2;
 
   ctx.fillRect(playbroundBeginX, playbroundBeginY, playgroundSize, playgroundSize);
   ctx.strokeRect(

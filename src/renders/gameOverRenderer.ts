@@ -1,14 +1,13 @@
 import Canvas from '../Canvas';
-import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_RED } from '../configuration';
+import { TILE_SIZE, COLOR_RED } from '../configuration';
+import getPlaygrounPosition from '../utils/getPlaygroundPosition';
 import store from '../store/store';
 
-export default function gameOverRenderer({ ctx, width, height }: Canvas): void {
+export default function gameOverRenderer(canvas: Canvas): void {
   if (store.getState().game.gameOver) {
+    const { ctx } = canvas;
     ctx.fillStyle = COLOR_RED;
-
-    const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
-    const playbroundBeginX = (width - playgroundSize) / 2;
-    const playbroundBeginY = (height - playgroundSize) / 2;
+    const { playgroundSize, playbroundBeginX, playbroundBeginY } = getPlaygrounPosition(canvas);
 
     ctx.fillRect(
       playbroundBeginX - TILE_SIZE,

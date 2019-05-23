@@ -1,11 +1,11 @@
 import Canvas from '../Canvas';
 import store from '../store/store';
-import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_WHITE } from '../configuration';
+import getPlaygroundPosition from '../utils/getPlaygroundPosition';
+import { TILE_SIZE, COLOR_WHITE } from '../configuration';
 
-export default function scoreRenderer({ ctx, width, height }: Canvas): void {
-  const playgroundSize = TILE_SIZE * PLAYGROUND_SIZE;
-  const playbroundBeginX = (width - playgroundSize) / 2;
-  const playbroundBeginY = (height - playgroundSize) / 2;
+export default function scoreRenderer(canvas: Canvas): void {
+  const { ctx } = canvas;
+  const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
 
   ctx.font = "20px 'Roboto', monospase";
   ctx.fillStyle = COLOR_WHITE;
