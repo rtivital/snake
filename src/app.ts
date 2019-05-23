@@ -7,9 +7,10 @@ import baitRenderer from './renders/baitRenderer';
 import gameOverRenderer from './renders/gameOverRenderer';
 import store from './store/store';
 import { moveSnake, growSnake } from './store/modules/snake';
-import { GAME_SPEED, PLAYGROUND_SIZE } from './configuration';
+import { GAME_SPEED } from './configuration';
 import { gameOver, setGameInterval, incrementScore, setDirection } from './store/modules/game';
 import audio from './audio/audio';
+import hasCollisions from './utils/hasCollisions';
 import { generateBait } from './store/modules/bait';
 
 const canvas = new Canvas({
@@ -38,22 +39,6 @@ window.addEventListener('keydown', (event) => {
     store.dispatch(setDirection('left'));
   }
 });
-
-function hasCollisions(snake: { x: number; y: number }[]): boolean {
-  const head = snake[0];
-
-  if (head.x < 0 || head.x > PLAYGROUND_SIZE - 1 || head.y < 0 || head.y > PLAYGROUND_SIZE - 1) {
-    return true;
-  }
-
-  for (let i = snake.length - 1; i > 0; i -= 1) {
-    if (head.x === snake[i].x && head.y === snake[i].y) {
-      return true;
-    }
-  }
-
-  return false;
-}
 
 function game(): void {
   const {
