@@ -14,7 +14,7 @@ export default class Game {
     const { game } = store.getState();
 
     // prevent snake from changing direction during initialization and game over
-    if (!game.gameOver || !game.initialized) {
+    if (!game.gameOver && game.initialized) {
       (which === 87 || which === 38) && store.dispatch(setDirection('up'));
       (which === 83 || which === 40) && store.dispatch(setDirection('down'));
       (which === 68 || which === 39) && store.dispatch(setDirection('right'));
@@ -23,15 +23,13 @@ export default class Game {
       if (game.initialized) {
         this.restart();
       } else {
-        this.init();
+        this.start();
       }
     }
   };
 
   public init = (): void => {
     window.addEventListener('keydown', this.handleKeyDown);
-    store.dispatch(initializeGame());
-    this.interval = window.setInterval(this.run, GAME_SPEED);
   };
 
   private run = (): void => {
@@ -43,18 +41,25 @@ export default class Game {
       audio.gameOver.play();
     } else {
       const head = snake[0];
+
       if (head.x === bait.x && head.y === bait.y) {
         store.dispatch(growSnake());
         store.dispatch(generateBait(snake));
         store.dispatch(incrementScore());
         audio.bait.play();
       }
+
       store.dispatch(moveSnake(game.direction));
     }
   };
 
-  private restart = () => {
-    store.dispatch(reset());
+  private start = (): void => {
+    store.dispatch(initializeGame());
     this.interval = window.setInterval(this.run, GAME_SPEED);
+  };
+
+  private restart = (): void => {
+    store.dispatch(reset());
+    this.start();
   };
 }
