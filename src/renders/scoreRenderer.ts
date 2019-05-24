@@ -7,6 +7,7 @@ export default function scoreRenderer(canvas: Canvas): void {
   const { ctx } = canvas;
   const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
 
+  ctx.textAlign = 'left';
   ctx.font = "20px 'Roboto', sans-serif";
   ctx.fillStyle = COLOR_WHITE;
   ctx.fillText(`Score: ${store.getState().game.score}`, playbroundBeginX - TILE_SIZE, playbroundBeginY - 25);
