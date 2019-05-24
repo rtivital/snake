@@ -2,26 +2,19 @@ import { Direction } from '../../types';
 import isOpositeDirection from '../../utils/isOpositeDirection';
 
 export const INITIALIZE_GAME = 'game/INITIALIZE_GAME';
-export const SET_GAME_INTERVAL = 'game/SET_GAME_INTERVAL';
 export const GAME_OVER = 'game/GAME_OVER';
 export const RESET = 'game/RESET';
 export const SET_DIRECTION = 'game/SET_DIRECTION';
 export const INCREMENT_SCORE = 'game/INCREMENT_SCORE';
 
 type GameState = Readonly<{
-  interval: number;
   gameOver: boolean;
   direction: Direction;
   score: number;
   initialized: boolean;
 }>;
 
-export const initialState: GameState = { interval: 0, gameOver: false, direction: 'up', score: 0, initialized: false };
-
-export interface SetGameIntervalAction {
-  type: typeof SET_GAME_INTERVAL;
-  payload: number;
-}
+export const initialState: GameState = { gameOver: false, direction: 'up', score: 0, initialized: false };
 
 export interface GameOverAction {
   type: typeof GAME_OVER;
@@ -44,11 +37,6 @@ export interface InitializeGameAction {
   type: typeof INITIALIZE_GAME;
 }
 
-export const setGameInterval = (interval: number): SetGameIntervalAction => ({
-  type: SET_GAME_INTERVAL,
-  payload: interval,
-});
-
 export const setDirection = (direction: Direction): SetDirectionAction => ({
   type: SET_DIRECTION,
   payload: direction,
@@ -59,13 +47,7 @@ export const reset = (): ResetAction => ({ type: RESET });
 export const gameOver = (): GameOverAction => ({ type: GAME_OVER });
 export const incrementScore = (): IncrementScoreAction => ({ type: INCREMENT_SCORE });
 
-type GameActions =
-  | SetGameIntervalAction
-  | GameOverAction
-  | ResetAction
-  | SetDirectionAction
-  | IncrementScoreAction
-  | InitializeGameAction;
+type GameActions = GameOverAction | ResetAction | SetDirectionAction | IncrementScoreAction | InitializeGameAction;
 
 export default function gameReducer(state: GameState = initialState, action: GameActions): GameState {
   switch (action.type) {
@@ -77,9 +59,6 @@ export default function gameReducer(state: GameState = initialState, action: Gam
 
     case GAME_OVER:
       return { ...state, gameOver: true };
-
-    case SET_GAME_INTERVAL:
-      return { ...state, interval: action.payload };
 
     case SET_DIRECTION:
       return isOpositeDirection(state.direction, action.payload) ? state : { ...state, direction: action.payload };
