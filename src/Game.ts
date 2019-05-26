@@ -1,3 +1,4 @@
+import throttle from 'lodash.throttle';
 import { GAME_SPEED } from './configuration';
 import store from './store/store';
 import { setDirection, reset, gameOver, initializeGame, incrementScore } from './store/modules/game';
@@ -9,7 +10,7 @@ import audio from './audio/audio';
 export default class Game {
   private interval: number = 0;
 
-  private handleKeyDown = (event: KeyboardEvent): void => {
+  private handleKeyDown = throttle((event: KeyboardEvent): void => {
     const { which } = event;
     const { game } = store.getState();
 
@@ -26,7 +27,7 @@ export default class Game {
         this.start();
       }
     }
-  };
+  }, GAME_SPEED);
 
   public init = (): void => {
     window.addEventListener('keydown', this.handleKeyDown);
