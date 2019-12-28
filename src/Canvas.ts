@@ -1,4 +1,10 @@
 import throttle from 'lodash.throttle';
+import { PLAYGROUND_SIZE } from './configuration';
+
+function getTileSize({ width, height, playgroundSize }: { width: number; height: number; playgroundSize: number }) {
+  const shortestSide = Math.min(width, height);
+  return Math.floor(shortestSide / playgroundSize - 3);
+}
 
 type Renderer = (canvas: Canvas) => void;
 
@@ -9,6 +15,7 @@ export default class Canvas {
   public width: number;
   public height: number;
   private renderers: Renderer[];
+  public tileSize: number;
 
   constructor({ selector, renderers }: { selector: string; renderers: Renderer[] }) {
     this.element = <HTMLCanvasElement>document.querySelector(selector);
@@ -22,6 +29,7 @@ export default class Canvas {
     const rect = this.element.getBoundingClientRect();
     this.width = rect.width;
     this.height = rect.height;
+    this.tileSize = getTileSize({ width: rect.width, height: rect.height, playgroundSize: PLAYGROUND_SIZE });
 
     // we need to render on resize to make sure we do not break anything
     window.addEventListener(
@@ -42,6 +50,7 @@ export default class Canvas {
     const rect = this.element.getBoundingClientRect();
     this.width = rect.width;
     this.height = rect.height;
+    this.tileSize = getTileSize({ width: rect.width, height: rect.height, playgroundSize: PLAYGROUND_SIZE });
     this.element.width = rect.width * this.dpr;
     this.element.height = rect.height * this.dpr;
     this.ctx.scale(this.dpr, this.dpr);

@@ -1,5 +1,5 @@
 import getPlaygroundPosition from './getPlaygroundPosition';
-import { TILE_SIZE, COLOR_WHITE } from '../configuration';
+import { COLOR_WHITE } from '../configuration';
 import Canvas from '../Canvas';
 
 interface CreateOverlay {
@@ -16,21 +16,25 @@ export default function createOverlayRender({ background, mainMessage, secondary
     ctx.fillStyle = background;
     ctx.globalAlpha = 0.8;
     ctx.fillRect(
-      playbroundBeginX - TILE_SIZE,
-      playbroundBeginY - TILE_SIZE,
-      playgroundSize + TILE_SIZE * 2,
-      playgroundSize + TILE_SIZE * 2
+      playbroundBeginX - canvas.tileSize,
+      playbroundBeginY - canvas.tileSize,
+      playgroundSize + canvas.tileSize * 2,
+      playgroundSize + canvas.tileSize * 2
     );
 
     ctx.fillStyle = COLOR_WHITE;
     ctx.textAlign = 'center';
     ctx.globalAlpha = 1;
     ctx.font = "40px 'Roboto', sans-serif";
-    ctx.fillText(mainMessage, playbroundBeginX - TILE_SIZE + playgroundSize / 2, playbroundBeginY + playgroundSize / 2);
+    ctx.fillText(
+      mainMessage,
+      playbroundBeginX - canvas.tileSize + playgroundSize / 2,
+      playbroundBeginY + playgroundSize / 2
+    );
     ctx.font = "20px 'Roboto', sans-serif";
     ctx.fillText(
       secondaryMessage,
-      playbroundBeginX - TILE_SIZE + playgroundSize / 2,
+      playbroundBeginX - canvas.tileSize + playgroundSize / 2,
       playbroundBeginY + playgroundSize - 30
     );
   };

@@ -1,4 +1,3 @@
-export const TILE_SIZE = 10; // size of single playground tile in px
 export const PLAYGROUND_SIZE = 40; // amount of tiles that playground will have
 export const INITIAL_SNAKE_SIZE = 3; // default length of the snake
 export const GAME_SPEED = 1000 / 20; // fps, not 60 as snake moves one tile at each frame

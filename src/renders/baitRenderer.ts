@@ -1,6 +1,6 @@
 import Canvas from '../Canvas';
 import store from '../store/store';
-import { TILE_SIZE, COLOR_RED } from '../configuration';
+import { COLOR_RED } from '../configuration';
 import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 
 export default function baitRenderer(canvas: Canvas) {
@@ -9,5 +9,10 @@ export default function baitRenderer(canvas: Canvas) {
   const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
 
   ctx.fillStyle = COLOR_RED;
-  ctx.fillRect(playbroundBeginX + TILE_SIZE * bait.x, playbroundBeginY + TILE_SIZE * bait.y, TILE_SIZE, TILE_SIZE);
+  ctx.fillRect(
+    playbroundBeginX + canvas.tileSize * bait.x,
+    playbroundBeginY + canvas.tileSize * bait.y,
+    canvas.tileSize,
+    canvas.tileSize
+  );
 }
