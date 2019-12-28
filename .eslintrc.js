@@ -22,6 +22,7 @@ module.exports = {
 
     // disabled for condition && someFunc()
     'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': 'off',
 
     // backend developers like _, no need to transform data all the time
     camelcase: 'off',
