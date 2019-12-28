@@ -2,7 +2,7 @@ import Canvas from '../Canvas';
 import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 import { TILE_SIZE, PLAYGROUND_SIZE, COLOR_LIGHT_INDIGO, COLOR_WHITE, COLOR_LIME } from '../configuration';
 
-export default function playgroundRenderer(canvas: Canvas): void {
+export default function playgroundRenderer(canvas: Canvas) {
   const { ctx } = canvas;
   const { playgroundSize, playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
 

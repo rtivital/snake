@@ -26,6 +26,7 @@ module.exports = {
 
     // backend developers like _, no need to transform data all the time
     camelcase: 'off',
+    'keyword-spacing': 'off',
 
     // Has some bugs
     'prefer-destructuring': 'off',

@@ -12,7 +12,7 @@ export default class Canvas {
 
   constructor({ selector, renderers }: { selector: string; renderers: Renderer[] }) {
     this.element = <HTMLCanvasElement>document.querySelector(selector);
-    this.ctx = <CanvasRenderingContext2D> this.element.getContext('2d');
+    this.ctx = <CanvasRenderingContext2D>this.element.getContext('2d');
     this.renderers = renderers;
     this.dpr = window.devicePixelRatio || 1;
 
@@ -24,15 +24,18 @@ export default class Canvas {
     this.height = rect.height;
 
     // we need to render on resize to make sure we do not break anything
-    window.addEventListener('resize', throttle(() => this.fitToWindow({ render: true }), 200));
+    window.addEventListener(
+      'resize',
+      throttle(() => this.fitToWindow({ render: true }), 200)
+    );
   }
 
-  public render = (): this => {
+  public render = () => {
     this.renderers.forEach((renderer) => renderer(this));
     return this;
   };
 
-  private fitToWindow = ({ render }: { render: boolean }): this => {
+  private fitToWindow = ({ render }: { render: boolean }) => {
     this.element.width = window.innerWidth;
     this.element.height = window.innerHeight;
 

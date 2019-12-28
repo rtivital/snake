@@ -3,7 +3,7 @@ import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 import { TILE_SIZE, COLOR_INDIGO, COLOR_GREEN } from '../configuration';
 import store from '../store/store';
 
-export default function snakeRenderer(canvas: Canvas): void {
+export default function snakeRenderer(canvas: Canvas) {
   const { snake } = store.getState();
   const { ctx } = canvas;
   const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);

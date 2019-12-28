@@ -8,9 +8,9 @@ import hasCollisions from './utils/hasCollisions';
 import audio from './audio/audio';
 
 export default class Game {
-  private interval: number = 0;
+  private interval = 0;
 
-  private handleKeyDown = throttle((event: KeyboardEvent): void => {
+  private handleKeyDown = throttle((event: KeyboardEvent) => {
     const { which } = event;
     const { game } = store.getState();
 
@@ -29,11 +29,11 @@ export default class Game {
     }
   }, GAME_SPEED);
 
-  public init = (): void => {
+  public init = () => {
     window.addEventListener('keydown', this.handleKeyDown);
   };
 
-  private run = (): void => {
+  private run = () => {
     const { game, snake, bait } = store.getState();
 
     if (hasCollisions(snake)) {
@@ -54,12 +54,12 @@ export default class Game {
     }
   };
 
-  private start = (): void => {
+  private start = () => {
     store.dispatch(initializeGame());
     this.interval = window.setInterval(this.run, GAME_SPEED);
   };
 
-  private restart = (): void => {
+  private restart = () => {
     store.dispatch(reset());
     this.start();
   };

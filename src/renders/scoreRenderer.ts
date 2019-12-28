@@ -3,7 +3,7 @@ import store from '../store/store';
 import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 import { TILE_SIZE, COLOR_WHITE } from '../configuration';
 
-export default function scoreRenderer(canvas: Canvas): void {
+export default function scoreRenderer(canvas: Canvas) {
   const { ctx } = canvas;
   const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
 

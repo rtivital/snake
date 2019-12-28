@@ -1,7 +1,7 @@
 import { Snake } from '../types';
 import { PLAYGROUND_SIZE } from '../configuration';
 
-export default function hasCollisions(snake: Snake): boolean {
+export default function hasCollisions(snake: Snake) {
   const head = snake[0];
 
   if (head.x < 0 || head.x > PLAYGROUND_SIZE - 1 || head.y < 0 || head.y > PLAYGROUND_SIZE - 1) {

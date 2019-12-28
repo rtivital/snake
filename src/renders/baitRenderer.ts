@@ -3,7 +3,7 @@ import store from '../store/store';
 import { TILE_SIZE, COLOR_RED } from '../configuration';
 import getPlaygroundPosition from '../utils/getPlaygroundPosition';
 
-export default function baitRenderer(canvas: Canvas): void {
+export default function baitRenderer(canvas: Canvas) {
   const { bait } = store.getState();
   const { ctx } = canvas;
   const { playbroundBeginX, playbroundBeginY } = getPlaygroundPosition(canvas);
